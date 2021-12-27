@@ -13,6 +13,7 @@
   listenToLookup();
   // load the user from github
   //perform the fetch here
+  //this should call createRepoElement for every item in the repos
   function loadUser(username) {
     fetch(`https://api.github.com/users/${username}`)
       .then((response) => response.json())
