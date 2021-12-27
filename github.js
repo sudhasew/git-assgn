@@ -2,7 +2,7 @@
   const lookupButton = document.getElementById("lookupButton");
   const usernameInput = document.getElementById("usernameInput");
 
-  // listen to the lookup button
+  // listen to the lookup button(CREATING A FUNCTION)
   // call the loadUser function
   function listenToLookup() {
     lookupButton.addEventListener("click", (event) => {
@@ -15,14 +15,17 @@
   //perform the fetch here
   //this should call createRepoElement for every item in the repos
   function loadUser(username) {
+    //loading the user from the github using URL
     fetch(`https://api.github.com/users/${username}`)
       .then((response) => response.json())
       .then((user) => {
         //console.log(user);
+        //then fetching the repos from URL
         fetch(user.repos_url)
           .then((response) => response.json())
           .then((repos) => {
             updateDOM(user, repos);
+            //because of more repo_url we need to use for loop
             for (let i = 0; i < repos.length; i++) {
               console.log(repos[i]);
             }
@@ -31,7 +34,7 @@
   }
 
   // update the page
-  // set the header, show the repos
+  // set the header(h2), show the repos
   // this should call createRepoElement for every item in the repos
   function updateDOM(user, repos) {
     const username = document.getElementById("username");
@@ -56,6 +59,4 @@
     li.append(a);
     return li;
   }
-
-  listenToLookup();
 })();
